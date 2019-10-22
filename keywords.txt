@@ -1,0 +1,8 @@
+# Keywords for screwdriver
+
+ScrewDriver		KEYWORD1
+VARIABLE_PAIR	KEYWORD1
+
+AddVariableMap	KEYWORD2
+Run				KEYWORD2
+
