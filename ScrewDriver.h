@@ -10,7 +10,7 @@ class ScrewDriver {
   public:
   struct VARIABLE_PAIR {
     String variable;
-    int* addr;
+    double* addr;
   };
   
   private:
@@ -38,7 +38,7 @@ class ScrewDriver {
   
   COMMAND Tokenize(String s);
 
-  int* VariableLookup(String variableName);
+  double* VariableLookup(String variableName);
 
   void ListVariables();
 

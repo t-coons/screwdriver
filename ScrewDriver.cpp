@@ -44,7 +44,7 @@ ScrewDriver::COMMAND ScrewDriver::Tokenize(String s) {
   return cmd;
 }
 
-int* ScrewDriver::VariableLookup(String variableName) {
+double* ScrewDriver::VariableLookup(String variableName) {
   for (unsigned int i = 0; i < variableMapSize; i++) {
     if (variableName.equals(variableMap[i].variable)) {
       return variableMap[i].addr;
@@ -66,7 +66,7 @@ void ScrewDriver::ListVariables() {
 }
 
 void ScrewDriver::PrintVariable(String variableName) {
-  int* addr = VariableLookup(variableName);
+  double* addr = VariableLookup(variableName);
   Serial.print(variableName);
   Serial.print(": ");
   if (addr) {
@@ -88,15 +88,15 @@ void ScrewDriver::Run(String s) {
   if (cmd.name == NONE) {
     return;
   }
-  int* addr = 0;
-  int value = 0;
+  double* addr = 0;
+  double value = 0;
   switch (cmd.name) {
     case SET:
       // TODO: Impliment set
       break;
     case UPDATE:
       addr = VariableLookup(cmd.variable);
-      value = cmd.value.toInt();
+      value = cmd.value.toDouble();
       if (addr) {
         *addr = value;
       }
