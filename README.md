@@ -57,6 +57,8 @@ To read from the Serial monitor just set up a while loop in the loop() function 
       sd.Run(s);
     }
 
+## Example snippet
+
 To wrap it up is a snippet of the program in action using the above example setup variables:
 ```js
 list
