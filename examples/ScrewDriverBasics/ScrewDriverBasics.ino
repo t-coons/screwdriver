@@ -3,9 +3,9 @@
 
 ScrewDriver sd;
 
-int var0 = 0;
-int var1 = 1;
-int var2 = 2;
+double var0 = 0;
+double var1 = 1;
+double var2 = 2;
 const unsigned int numVariables = 3;
 ScrewDriver::VARIABLE_PAIR variableMap[numVariables] =
 {
