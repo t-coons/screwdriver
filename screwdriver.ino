@@ -3,37 +3,22 @@
 
 ScrewDriver sd;
 
-int test0 = 0;
-int test1 = 1;
-int test2 = 2;
-ScrewDriver::VARIABLE_PAIR variableMap[3] =
+int var0 = 0;
+int var1 = 1;
+int var2 = 2;
+const unsigned int numVariables = 3;
+ScrewDriver::VARIABLE_PAIR variableMap[numVariables] =
 {
-  { "test0", &test0 },
-  { "test1", &test1 },
-  { "test2", &test2 }
+  { "var0", &var0 },
+  { "var1", &var1 },
+  { "var2", &var2 }
 };
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
 
-  sd.AddVariableMap(variableMap, 3);
-  sd.Run("Cmd");
-  sd.Run("Cmd arg1");
-  sd.Run("Cmd arg1 arg2");
-  sd.Run("Cmd arg1 arg2 arg3");
-  sd.Run("update test");
-  sd.Run("update test0");
-  sd.Run("list");
-  sd.Run("update test0 1");
-  sd.Run("update test1 2");
-  sd.Run("update test2 3");
-  sd.Run("list");
-  sd.Run("print test0");
-  sd.Run("print test1");
-  sd.Run("print test2");
-  
-  
+  sd.AddVariableMap(variableMap, numVariables);  
 }
 
 void loop() {
