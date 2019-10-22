@@ -15,16 +15,16 @@ A variable pair is what actually creates the linking and is of type
 
     struct VARIABLE_PAIR {
       String variable;
-      int* addr;
+      double* addr;
     }
-> Note: the variable pair can only link to an integer currently. This is planned to by more dynamic with further updates
+> Note: the variable pair can only link to an double currently. This is planned to by more dynamic with further updates
 
 An example of this is: 
 	
 	ScrewDriver sd;
-    int var0 = 0;
-    int var1 = 1;
-    int var2 = 2;
+    double var0 = 0;
+    double var1 = 1;
+    double var2 = 2;
     const unsigned int numVariables = 3;
     ScrewDriver::VARIABLE_PAIR variableMap[numVariables] =
     {
@@ -63,19 +63,19 @@ To wrap it up is a snippet of the program in action using the above example setu
 ```js
 list
 
-var0: 0
-var1: 1
-var2: 2
+var0: 0.00
+var1: 1.00
+var2: 2.00
 update var0 42
 
 update var1 60
 
 print var0
 
-var0: 42
+var0: 42.00
 list
 
-var0: 42
-var1: 60
-var2: 2
+var0: 42.00
+var1: 60.00
+var2: 2.00
 ```
