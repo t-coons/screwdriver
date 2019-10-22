@@ -1,4 +1,4 @@
-# screwdriver
+# ScrewDriver
 Arduino Library that allows variables to be modified via serial monitor. The overall goal is to allow variables to change without re-upload to hasten the debug and tuning processes.
 
 ## Include
@@ -11,13 +11,13 @@ A variable map must be created and initialized to link variables
 Variable map is of type:
 
     VARIABLE_PAIR variableMap[size];
-A variable pair is what actually creates the linking and is of type
+A variable pair is what actually creates the linking and is of type:
 
     struct VARIABLE_PAIR {
       String variable;
       double* addr;
     }
-> Note: the variable pair can only link to an double currently. This is planned to by more dynamic with further updates
+> Note: the variable pair can only link to an double currently. This is planned to be more dynamic with further updates
 
 An example of this is: 
 	
