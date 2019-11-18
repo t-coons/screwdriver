@@ -3,14 +3,14 @@
 #define ScrewDriver_h
 
 #include <Arduino.h>
+#include "VAR.h"
 
 class ScrewDriver {
   // Variables
-  
   public:
   struct VARIABLE_PAIR {
-    String variable;
-    double* addr;
+    String varName;
+    VAR var;
   };
   
   private:
@@ -38,7 +38,7 @@ class ScrewDriver {
   
   COMMAND Tokenize(String s);
 
-  double* VariableLookup(String variableName);
+  int VariableLookup(String variableName);
 
   void ListVariables();
 

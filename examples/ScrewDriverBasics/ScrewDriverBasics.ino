@@ -1,18 +1,16 @@
 #include "ScrewDriver.h"
 
-
 ScrewDriver sd;
 
-double var0 = 0;
-double var1 = 1;
-double var2 = 2;
-const unsigned int numVariables = 3;
-ScrewDriver::VARIABLE_PAIR variableMap[numVariables] =
+double d = 1.0;
+int i = 2;
+
+ScrewDriver::VARIABLE_PAIR variableMap[] =
 {
-  { "var0", &var0 },
-  { "var1", &var1 },
-  { "var2", &var2 }
+  { "var0", VAR(&d) },
+  { "var1", VAR(&i) }
 };
+const unsigned int numVariables = sizeof(variableMap) / sizeof(ScrewDriver::VARIABLE_PAIR);
 
 void setup() {
   // put your setup code here, to run once:

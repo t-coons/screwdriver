@@ -44,37 +44,38 @@ ScrewDriver::COMMAND ScrewDriver::Tokenize(String s) {
   return cmd;
 }
 
-double* ScrewDriver::VariableLookup(String variableName) {
+int ScrewDriver::VariableLookup(String varName) {
   for (unsigned int i = 0; i < variableMapSize; i++) {
-    if (variableName.equals(variableMap[i].variable)) {
-      return variableMap[i].addr;
+    if (varName.equals(variableMap[i].varName)) {
+      return i;
     }
   }
-  return NULL;
+  return -1;
 }
 
 void ScrewDriver::ListVariables() {
   for (unsigned int i = 0; i < variableMapSize; i++) {
-    Serial.print(variableMap[i].variable);
+    Serial.print(variableMap[i].varName);
+    Serial.print("[");
+    variableMap[i].var.PrintType();
+    Serial.print("]");
     Serial.print(": ");
-    if (variableMap[i].addr) {
-      Serial.println(*(variableMap[i].addr));
-    } else {
-      Serial.println("NULL");
-    }
+    variableMap[i].var.Print();
+    Serial.println();
   }
 }
 
-void ScrewDriver::PrintVariable(String variableName) {
-  double* addr = VariableLookup(variableName);
-  Serial.print(variableName);
-  Serial.print(": ");
-  if (addr) {
-    Serial.println(*addr);
-  } else {
-    Serial.println("does not exist");
+void ScrewDriver::PrintVariable(String varName) {
+  int i = VariableLookup(varName);
+  Serial.print(varName);
+  if (i > -1) {
+    Serial.print("[");
+    variableMap[i].var.PrintType();
+    Serial.print("]");
+    Serial.print(": ");
+    variableMap[i].var.Print();
   }
-  
+  Serial.println();
 }
 
 void ScrewDriver::AddVariableMap(VARIABLE_PAIR variableMap[], unsigned int variableMapSize) {
@@ -88,17 +89,15 @@ void ScrewDriver::Run(String s) {
   if (cmd.name == NONE) {
     return;
   }
-  double* addr = 0;
-  double value = 0;
+  int i = 0;
   switch (cmd.name) {
     case SET:
       // TODO: Impliment set
       break;
     case UPDATE:
-      addr = VariableLookup(cmd.variable);
-      value = cmd.value.toDouble();
-      if (addr) {
-        *addr = value;
+      i = VariableLookup(cmd.variable);
+      if (i > -1) {
+        variableMap[i].var.Set(cmd.value);
       }
       break;
     case LIST: 
