@@ -3,7 +3,7 @@ Arduino Library that allows variables to be modified via serial monitor. The ove
 
 ## Include
 Include like any other library once added
-    
+
     #include "ScrewDriver.h"
 
 ## Setup
@@ -14,25 +14,23 @@ Variable map is of type:
 A variable pair is what actually creates the linking and is of type:
 
     struct VARIABLE_PAIR {
-      String variable;
-      double* addr;
-    }
-> Note: the variable pair can only link to an double currently. This is planned to be more dynamic with further updates
-
-An example of this is: 
-	
-	ScrewDriver sd;
-    double var0 = 0;
-    double var1 = 1;
-    double var2 = 2;
-    const unsigned int numVariables = 3;
-    ScrewDriver::VARIABLE_PAIR variableMap[numVariables] =
-    {
-      { "var0", &var0 },
-      { "var1", &var1 },
-      { "var2", &var2 }
+      String varName;
+      VAR var;
     };
-    sd.AddVariableMap(variableMap, numVariables);
+> Note: The variable pair can link to all the arduino defined [data types](https://www.arduino.cc/reference/en/#structure)
+
+
+An example of this is:
+
+    double d = 1.0;
+    int i = 2;
+
+    ScrewDriver::VARIABLE_PAIR variableMap[] =
+    {
+      { "var0", VAR(&d) },
+      { "var1", VAR(&i) }
+    };
+    const unsigned int numVariables = 2;
 > Note: Make sure the variables set in the map do not go out of scope! An easy way around this is to set them as globals
 
 All that is left is to parse the commands to run on the variables
@@ -46,9 +44,9 @@ Commands are ran using
 
     ScrewDriver::Run()
 
-continuing from the previous example: 
-    
-    sd.Run("update var0 7");
+continuing from the previous example:
+
+    sd.Run("update var0 2.718281828459045");
 
 To read from the Serial monitor just set up a while loop in the loop() function like such:
 
@@ -63,9 +61,8 @@ To wrap it up is a snippet of the program in action using the above example setu
 ```js
 list
 
-var0: 0.00
-var1: 1.00
-var2: 2.00
+var0: 1.00
+var1: 2
 update var0 42
 
 update var1 60
@@ -76,6 +73,5 @@ var0: 42.00
 list
 
 var0: 42.00
-var1: 60.00
-var2: 2.00
+var1: 60
 ```
